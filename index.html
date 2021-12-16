@@ -5,37 +5,195 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>Ultimate-Meme-Generator</title>
 </head>
 
-<body>
-
-    <section class="img-gallery">
+<body onload="onInitGallery()">
 
 
 
-        GALLERY
+    <!-- *************************************************TOP-NAV******************************************* -->
+    <header class="main-header">
+
+        <div>
+            <div class="logo"> <img class="logo-img" src="img/symbol/Layer 2@3x.png"></div>
+            <button class="btn-menu" onclick="toggleMenu()">☰</button>
+        </div>
+
+        <!-- <div class="move-to-section">
+            <span onclick="moveToSection('gallery','meme-editor','about')"
+                class="move-to gallery-btn Gallery Text-Style">
+                Gallery</span> |
+            <span onclick="moveToSection('meme-editor','about','gallery')" class="move-to memes-btn Gallery Text-Style">
+                Memes</span> |
+            <span onclick="moveToSection('about','gallery','meme-editor')" class="move-to about-btn Gallery Text-Style">
+                About</span>
+        </div> -->
+
+        <nav class="main-nav">
+            <ul class="clean-list flex">
+                <li onclick="moveToSection('gallery','meme-editor','about')"><a href="#">Gallery</a>
+                </li>
+                <li onclick="moveToSection('meme-editor','about','gallery')"><a href="#">Memes</a></li>
+                <!-- <li onclick="moveToSection('about','gallery','meme-editor')">
+                    <a href="#">About</a> -->
+                </li>
+            </ul>
+        </nav>
+    </header>
 
 
 
+
+
+
+
+    <!-- *************************************************GALLERY******************************************* -->
+
+
+    <section class="gallery">
+
+
+        <div class="search-menu">
+        </div>
+
+        <div class="grid-container">
+            <!-- GRID OF IMAGES -->
+        </div>
 
     </section>
 
 
 
-    <!-- <section class="meme-editor">
+    <!-- *************************************************MEMES******************************************* -->
 
-        MEME EDITOR
-
-
-
-    </section> -->
+    <section class="meme-editor  hidden">
+        <header class="meme-editor-header">
 
 
 
 
+        </header>
+
+
+
+        <div class="main-editor">
+
+
+
+            <div class="canvas-container">
+                <canvas id="my-canvas" width="400" height="400" style="outline:1px solid rgb(78, 22, 180)"></canvas>
+            </div>
+
+            <div class="configuration">
+
+                <!-- LINE1 -->
+                <div class="box-1">
+                    <div class="config txt rounded-rectangle">
+                        <input class="no-border" oninput="onUpdateTxtInstant(event)" type="text" id="text-input"
+                            name="text-input" placeholder="insert your text here...">
+                    </div>
+                </div>
+
+
+
+                <!-- LINE2 -->
+                <div class="box-2">
+                    <div class="config switch-line">
+                        <button onclick="onSwitchLine()"><img
+                                src="img/symbol/up-and-down-opposite-double-arrows-side-by-side@3x.png"></button>
+                    </div>
+
+                    <div class="config add-line">
+                        <button onclick="onAddLine()"><img src="img/symbol/add@3x.png"></button>
+                    </div>
+                    <div class="config delete-line">
+                        <button onclick="onDeleteLine()"><img src="img/symbol/trash@3x.png"></button>
+                    </div>
+                </div>
+
+
+                <!-- LINE3 -->
+                <div class="box-3">
+                    <div class="config size">
+                        <button onclick=onUpdateSize(event,this,1)><img
+                                src="img/symbol/increase font - icon@3x.png"></button>
+                        <!-- <span>50 px</span> -->
+                        <button onclick=onUpdateSize(event,this,-1)><img
+                                src="img/symbol/decrease font - icon@3x.png"></button>
+                    </div>
+
+                    <div class="config align-txt">
+                        <button onclick="onTxtAlign('left')"><img src="img/symbol/align-to-left@3x.png"></button>
+                        <button onclick="onTxtAlign('center')"><img
+                                src="img/symbol/center-text-alignment@3x.png"></button>
+                        <button onclick="onTxtAlign('right')"><img src="img/symbol/align-to-right@3x.png"></button>
+                    </div>
+
+                </div>
+
+                <!-- LINE4 -->
+                <div class="box-4">
+                    <select class="font-input" onchange="onUpdateFontFamily(this.value)" class="font-family">
+                        <option value="impact">Impact</option>
+                        <option value="arial">Arial</option>
+                        <option value="veranda">Verdana</option>
+                        <option value="cursive ">cursive </option>
+                    </select>
+                </div>
+
+                <div class="config color">
+                    <button> <img src="img/symbol/paint-board-and-brush@3x.png"> </button>
+
+                    <input oninput="onUpdateColorInstant(event)" type="color" id="color-picker" name="color-picker"
+                        value="#FF0000">
+                    <label for="color-picker"></label>
+                    <!-- LINE5 -->
+                    <div class="box-5">
+
+                        <div class="config download">
+                            <button><a class="download" onclick="onDownloadImg(this)" download="my-img.jpg"> <img
+                                        src="img/symbol/download.png"></a>
+                            </button>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+    </section>
+
+    <!-- *************************************************ABOUT******************************************* -->
+
+    <section class="about hidden">
+
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam vero quod possimus asperiores, est delectus
+
+    </section>
+
+
+    <!-- *************************************************FOOTER******************************************* -->
+
+    <footer class="footer">
+        <img class="logo-img" src="img/symbol/Layer 2@3x.png">
+        Cofferights
+
+    </footer>
 
 
 
@@ -44,6 +202,7 @@
     <script src="js/services/storage-service.js"></script>
     <script src="js/services/i18n-service.js"></script>
     <script src="js/services/meme-service.js"></script>
+    <script src="js/gallery-controller.js"></script>
     <script src="js/meme-controller.js"></script>
 
 </body>

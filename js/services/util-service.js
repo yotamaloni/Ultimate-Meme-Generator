@@ -1,5 +1,10 @@
 'use strict';
 
+function toggleMenu() {
+  document.body.classList.toggle('menu-open');
+}
+
+
 function getRandomPrice(min, max) {
   const price = +(Math.random() * (max - min + 1) + min).toFixed(2);
   return price;
@@ -13,6 +18,11 @@ function makeId(length = 6) {
     txt += possible.charAt(Math.floor(Math.random() * possible.length));
   }
   return txt;
+}
+
+function strToFirstUpperCase(str) {
+  const firstLetter = str.charAt(0).toUpperCase();
+  return firstLetter + str.slice(1, str.length);
 }
 
 function makeLorem(wordCount = 100) {

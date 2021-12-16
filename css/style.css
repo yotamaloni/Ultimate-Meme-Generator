@@ -1,14 +1,307 @@
+@font-face {
+  font-family: Montserrat-Regular;
+  src: url(/font/Montserrat/Montserrat-Regular.ttf);
+}
+
 * {
   box-sizing: border-box;
+  font-family: Montserrat-Regular;
 }
 
 html {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  color: #626262;
+  color: #131212;
   line-height: 1.714;
 }
 
 body {
-  font-size: 1rem;
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+  background-color: #e3e3e3;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+button {
+  cursor: pointer;
+}
+
+.main-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff7f00;
+  position: fixed;
+  top: 0;
+  height: 100px;
+  padding: 8.5px 25px 1.7px 24.5px;
+}
+
+.clean-list {
+  list-style-type: none;
   margin: 0;
+  padding: 0;
+  text-decoration-line: none;
+}
+
+.logo-img {
+  height: 1.5rem;
+}
+
+.footer {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  background-color: #ff7f00;
+  color: #ffffff;
+  position: fixed;
+  bottom: 0;
+}
+
+/***********************GALLERY LAYOUT**********************************/
+
+.search-menu {
+  height: 100px;
+  margin-top: 100px;
+  background-color: red;
+}
+
+.grid-container {
+  display: grid;
+  max-height: 100%;
+  margin: 20px auto;
+  grid-template-columns: 3;
+  gap: 10px;
+}
+
+.gallery img {
+  height: 250px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/***********************MEMES LAYOUT**********************************/
+
+.main-editor {
+  display: flex;
+  margin-top: 20px;
+  gap: 30px;
+  margin: 120px auto;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+.main-editor > * {
+  flex-basis: 50%;
+}
+
+.hidden {
+  display: none;
+}
+
+.canvas-container {
+  width: 60vw;
+  height: 80vh;
+  background-color: plum;
+}
+
+.configuration {
+  background-color: powderblue;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.canvas-container,
+.configuration {
+  margin: 0 auto;
+  width: auto;
+}
+
+.configuration > *,
+.size,
+.align-txt {
+  display: flex;
+  gap: 10px;
+}
+
+.box-3 {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.box-3 > * {
+  flex-basis: 50%;
+}
+
+.rounded-rectangle {
+  width: 200px;
+  height: 30px;
+  margin: 0 0 1px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.no-border {
+  border: none;
+}
+
+.font-input {
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  padding: 0;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+/***********************MEMES GENERAL**********************************/
+
+.configuration img {
+  height: 25px;
+}
+.configuration button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+/* 
+.configuration button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+} */
+
+/*MOBILE ONLY*/
+@media (max-width: 780px) {
+  /* hamburger */
+  .main-nav ul {
+    position: fixed;
+    top: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 100vh;
+    border-inline-start: 1px solid #e5e5e5;
+    width: 150px;
+    transform: translateX(100%);
+    transition: transform 0.6s, box-shadow 0.6s;
+    padding-top: 20px;
+  }
+
+  body.menu-open .main-nav ul {
+    box-shadow: 0px 0px 30px rgb(0 0 0 / 30%);
+    transform: translateX(0);
+  }
+
+  .main-nav li {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .main-nav a {
+    display: block;
+    padding: 6px 20px;
+    transition: background-color 0.3s;
+    color: rgb(26, 24, 24);
+    text-decoration-line: none;
+  }
+
+  .main-header .main-nav a:hover {
+    background-color: #eee;
+  }
+}
+
+/*DESKTOP ONLY*/
+@media (min-width: 780px) {
+  .main-editor {
+    flex-direction: row;
+    width: auto;
+    justify-content: center;
+    max-height: 900px;
+    align-items: self-start;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: red;
+  }
+
+  .box-3 {
+    flex-wrap: nowrap;
+  }
+
+  /* .canvas-container,
+  .configuration {
+    margin: 0;
+    width: 100%;
+  } */
+  .main-editor > * {
+    flex-basis: 50%;
+  }
+
+  .main-nav ul {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .main-nav ul a {
+    color: white;
+    text-decoration-line: none;
+    padding-inline-end: 0;
+    padding-inline-end: 5px;
+  }
+  .main-nav ul a::after {
+    color: white;
+    content: ' |';
+  }
+
+  .main-header > * {
+    padding: 0 20px;
+  }
+  .btn-menu {
+    display: none;
+  }
+
+  .grid-container {
+    display: grid;
+    max-height: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 200px));
+    margin: 20px auto;
+    justify-items: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .gallery img {
+    height: 200px;
+    width: auto;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
