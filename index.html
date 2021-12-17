@@ -21,32 +21,15 @@
             <button class="btn-menu" onclick="toggleMenu()">☰</button>
         </div>
 
-        <!-- <div class="move-to-section">
-            <span onclick="moveToSection('gallery','meme-editor','about')"
-                class="move-to gallery-btn Gallery Text-Style">
-                Gallery</span> |
-            <span onclick="moveToSection('meme-editor','about','gallery')" class="move-to memes-btn Gallery Text-Style">
-                Memes</span> |
-            <span onclick="moveToSection('about','gallery','meme-editor')" class="move-to about-btn Gallery Text-Style">
-                About</span>
-        </div> -->
-
         <nav class="main-nav">
             <ul class="clean-list flex">
-                <li onclick="moveToSection('gallery','meme-editor','about')"><a href="#">Gallery</a>
+                <li onclick="moveToSection('gallery','meme-editor')"><a href="#">Gallery</a>
                 </li>
-                <li onclick="moveToSection('meme-editor','about','gallery')"><a href="#">Memes</a></li>
-                <!-- <li onclick="moveToSection('about','gallery','meme-editor')">
-                    <a href="#">About</a> -->
+                <li onclick="moveToSection('meme-editor','gallery')"><a href="#">Memes</a></li>
                 </li>
             </ul>
         </nav>
     </header>
-
-
-
-
-
 
 
     <!-- *************************************************GALLERY******************************************* -->
@@ -119,7 +102,6 @@
                     <div class="config size">
                         <button onclick=onUpdateSize(event,this,1)><img
                                 src="img/symbol/increase font - icon@3x.png"></button>
-                        <!-- <span>50 px</span> -->
                         <button onclick=onUpdateSize(event,this,-1)><img
                                 src="img/symbol/decrease font - icon@3x.png"></button>
                     </div>
@@ -160,15 +142,6 @@
                     </div>
 
 
-
-
-
-
-
-
-
-
-
                 </div>
 
 
@@ -178,20 +151,12 @@
 
     </section>
 
-    <!-- *************************************************ABOUT******************************************* -->
-
-    <section class="about hidden">
-
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam vero quod possimus asperiores, est delectus
-
-    </section>
-
-
+ 
     <!-- *************************************************FOOTER******************************************* -->
 
     <footer class="footer">
         <img class="logo-img" src="img/symbol/Layer 2@3x.png">
-        Cofferights
+        CoffeeRights
 
     </footer>
 
@@ -200,7 +165,6 @@
 
     <script src="js/services/util-service.js"></script>
     <script src="js/services/storage-service.js"></script>
-    <script src="js/services/i18n-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/gallery-controller.js"></script>
     <script src="js/meme-controller.js"></script>

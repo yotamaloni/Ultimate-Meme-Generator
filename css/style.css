@@ -61,8 +61,7 @@ button {
   align-items: center;
   background-color: #ff7f00;
   color: #ffffff;
-  position: fixed;
-  bottom: 0;
+  bottom: -100px;
 }
 
 /***********************GALLERY LAYOUT**********************************/
@@ -70,7 +69,6 @@ button {
 .search-menu {
   height: 100px;
   margin-top: 100px;
-  background-color: red;
 }
 
 .grid-container {
@@ -83,6 +81,7 @@ button {
 
 .gallery img {
   height: 250px;
+  cursor: pointer;
 }
 
 .item {
@@ -116,11 +115,9 @@ button {
 .canvas-container {
   width: 60vw;
   height: 80vh;
-  background-color: plum;
 }
 
 .configuration {
-  background-color: powderblue;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -241,22 +238,15 @@ button {
     flex-direction: row;
     width: auto;
     justify-content: center;
-    max-height: 900px;
     align-items: self-start;
     margin-left: 20px;
     margin-right: 20px;
-    background-color: red;
   }
 
   .box-3 {
     flex-wrap: nowrap;
   }
 
-  /* .canvas-container,
-  .configuration {
-    margin: 0;
-    width: 100%;
-  } */
   .main-editor > * {
     flex-basis: 50%;
   }
@@ -271,6 +261,10 @@ button {
     text-decoration-line: none;
     padding-inline-end: 0;
     padding-inline-end: 5px;
+  }
+
+  .main-nav ul a:hover {
+    color: rgb(71, 68, 68);
   }
   .main-nav ul a::after {
     color: white;
@@ -288,7 +282,7 @@ button {
     display: grid;
     max-height: 100%;
     grid-template-columns: repeat(auto-fill, minmax(200px, 200px));
-    margin: 20px auto;
+    margin: 20px 20px;
     justify-items: center;
     align-items: center;
     gap: 10px;

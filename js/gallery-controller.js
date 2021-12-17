@@ -21,17 +21,13 @@ function renderGallery() {
 
 function onImgSelect(id) {
   setImgId(id);
-  moveToSection('meme-editor', 'about', 'gallery');
-  console.log('d');
-  onInitMeme();
+  moveToSection('meme-editor', 'gallery');
 }
 
-function moveToSection(classToShow, classToHide1, classToHide2) {
+function moveToSection(classToShow, classToHide) {
   const elSectionToShow = document.querySelector(`.${classToShow}`);
   elSectionToShow.classList.remove('hidden');
-  var elSectionToHide = document.querySelector(`.${classToHide1}`);
-  elSectionToHide.classList.add('hidden');
-  elSectionToHide = document.querySelector(`.${classToHide2}`);
+  const elSectionToHide = document.querySelector(`.${classToHide}`);
   elSectionToHide.classList.add('hidden');
   if (classToShow === 'meme-editor') onInitMeme();
 }
