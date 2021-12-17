@@ -69,6 +69,24 @@ button {
 .search-menu {
   height: 100px;
   margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  gap: 10px
+}
+
+.keywords , .sort-txt{
+  font-size: 1.5rem;
+}
+
+.rounded-rectangle-gallery {
+  width: 200px;
+  height: 50px;
+  margin: 0 0 1px;
+  border-radius: 10px;
+  background-color: #fff;
 }
 
 .grid-container {

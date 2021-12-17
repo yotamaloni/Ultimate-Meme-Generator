@@ -2,6 +2,7 @@
 
 function onInitGallery() {
   renderGallery();
+  renderKeywords();
 }
 
 function renderGallery() {
@@ -19,9 +20,26 @@ function renderGallery() {
   elImgGrid.innerHTML = strHtml;
 }
 
+function renderKeywords() {
+  var keywords = getKeywords();
+  strHtml = keywords
+    .map((keyword) => {
+      keyword = strToFirstUpperCase(keyword);
+      return keyword;
+    })
+    .join(' , ');
+  const elImgGrid = document.querySelector('.keywords');
+  elImgGrid.innerHTML = strHtml;
+}
+
 function onImgSelect(id) {
   setImgId(id);
   moveToSection('meme-editor', 'gallery');
+}
+
+function onSort(ev) {
+  setSortBy(ev.target.value);
+  renderGallery();
 }
 
 function moveToSection(classToShow, classToHide) {

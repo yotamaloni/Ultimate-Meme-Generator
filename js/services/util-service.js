@@ -5,68 +5,12 @@ function toggleMenu() {
 }
 
 
-function getRandomPrice(min, max) {
-  const price = +(Math.random() * (max - min + 1) + min).toFixed(2);
-  return price;
-}
-
-function makeId(length = 6) {
-  const possible =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var txt = '';
-  for (var i = 0; i < length; i++) {
-    txt += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return txt;
-}
-
 function strToFirstUpperCase(str) {
   const firstLetter = str.charAt(0).toUpperCase();
   return firstLetter + str.slice(1, str.length);
 }
 
-function makeLorem(wordCount = 100) {
-  const words = [
-    'The sky',
-    'above',
-    'the port',
-    'was',
-    'the color of television',
-    'tuned',
-    'to',
-    'a dead channel',
-    '.',
-    'All',
-    'this happened',
-    'more or less',
-    '.',
-    'I',
-    'had',
-    'the story',
-    'bit by bit',
-    'from various people',
-    'and',
-    'as generally',
-    'happens',
-    'in such cases',
-    'each time',
-    'it',
-    'was',
-    'a different story',
-    '.',
-    'It',
-    'was',
-    'a pleasure',
-    'to',
-    'burn',
-  ];
-  var txt = '';
-  while (wordCount > 0) {
-    wordCount--;
-    txt += words[Math.floor(Math.random() * words.length)] + ' ';
-  }
-  return txt;
-}
+
 
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);

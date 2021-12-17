@@ -3,7 +3,8 @@ const NUM_OF_IMG = 18;
 var gCurrImgId;
 var gCurrImgId = getRandomIntInclusive(0, 17);
 var gCanvasSize = { width: null, height: null };
-var gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 };
+var gKeywords = ['funny', 'sad', 'sport', 'movie', 'politics'];
+var gSortBy = '';
 var gImgs = [];
 _createImgs();
 
@@ -13,6 +14,14 @@ var gMeme = {
   rectCoords: { xStart: null, yStart: null, xEnd: null, yEnd: null },
   lines: [],
 };
+
+function setSortBy(sortBy) {
+  gSortBy = sortBy;
+}
+
+function getKeywords() {
+  return gKeywords;
+}
 
 function setCanvasSize(width, height) {
   gCanvasSize = { width, height };
@@ -32,9 +41,22 @@ function _createImg(id) {
   const img = {
     id,
     url: `img/${id + 1}.jpg`,
-    keywords: ['funny', 'cat'],
+    keywords: ['sport'],
   };
+  img.keywords = getRandomKeywords();
   return img;
+}
+
+function getRandomKeywords() {
+  var keywords = [...gKeywords];
+  var NewKeywords = [];
+  for (var i = 0; i < 3; i++) {
+    var radomInt = getRandomIntInclusive(0, keywords.length - 1);
+    var keyword = keywords[radomInt];
+    NewKeywords.push(keyword);
+    keywords.splice(radomInt, 1);
+  }
+  return NewKeywords;
 }
 
 function setLineColor(color) {
@@ -59,7 +81,18 @@ function setImgId(id) {
 }
 
 function getImages() {
-  return gImgs;
+  const sortedImgs = gImgs.filter((img) => isKeywordIn(img));
+  return sortedImgs;
+}
+
+function isKeywordIn(img) {
+  var sortKey = gSortBy.toLowerCase();
+  var isInclude = false;
+  img.keywords.find(function (keyword) {
+    if (keyword.includes(sortKey)) isInclude = true;
+    return true;
+  });
+  return isInclude;
 }
 
 function setLineIdx() {
