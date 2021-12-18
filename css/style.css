@@ -14,14 +14,14 @@ html {
 }
 
 body {
-  height: 100vh;
   margin: 0px;
   padding: 0px;
   background-color: #e3e3e3;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
   justify-content: center;
+  height: auto;
+  height: 100vh;
 }
 
 button {
@@ -74,10 +74,11 @@ button {
   justify-content: center;
   align-items: center;
   padding-top: 20px;
-  gap: 10px
+  gap: 10px;
 }
 
-.keywords , .sort-txt{
+.keywords,
+.sort-txt {
   font-size: 1.5rem;
 }
 
@@ -212,7 +213,7 @@ button {
 } */
 
 /*MOBILE ONLY*/
-@media (max-width: 780px) {
+@media (max-width: 850px) {
   /* hamburger */
   .main-nav ul {
     position: fixed;
@@ -251,7 +252,7 @@ button {
 }
 
 /*DESKTOP ONLY*/
-@media (min-width: 780px) {
+@media (min-width: 850px) {
   .main-editor {
     flex-direction: row;
     width: auto;

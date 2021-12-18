@@ -59,6 +59,10 @@ function getRandomKeywords() {
   return NewKeywords;
 }
 
+function getNumOfLines() {
+  return gMeme.lines.length;
+}
+
 function setLineColor(color) {
   gMeme.lines[gMeme.selectedLineIdx].color = color;
 }
@@ -98,11 +102,15 @@ function isKeywordIn(img) {
 function setLineIdx() {
   const numOfLines = gMeme.lines.length;
   const lineIdx = gMeme.selectedLineIdx;
-  if (lineIdx === numOfLines - 1) {
+  if (lineIdx === numOfLines - 1 || lineIdx === null) {
     gMeme.selectedLineIdx = 0;
     return;
   }
   gMeme.selectedLineIdx++;
+}
+
+function setRemoveFocus() {
+  gMeme.selectedLineIdx = null;
 }
 
 function getLineIdx() {
@@ -171,18 +179,14 @@ function _getHeightIdx() {
 
 function getRectCoords() {
   const idx = gMeme.selectedLineIdx;
-  const lineLength = gMeme.lines[idx].lineLength;
-  const heightIdx = gMeme.lines[idx].heightIdx;
-  const align = gMeme.lines[idx].align;
-  const lineSize = gMeme.lines[idx].size;
-  const txtCoords = gMeme.lines[idx].cornerCoord;
+  const { lineLength, heightIdx, align, cornerCoord, size } = gMeme.lines[idx];
   const canvasWidth = gCanvasSize.width;
   const canvasHeight = gCanvasSize.height;
   const margin = 20;
 
   switch (align) {
     case 'left':
-      gMeme.rectCoords.xStart = txtCoords.xStart;
+      gMeme.rectCoords.xStart = cornerCoord.xStart;
       break;
     case 'right':
       gMeme.rectCoords.xStart = canvasWidth - lineLength - 10;
@@ -196,10 +200,10 @@ function getRectCoords() {
       gMeme.rectCoords.yStart = margin / 2;
       break;
     case 1:
-      gMeme.rectCoords.yStart = canvasHeight - lineSize - margin;
+      gMeme.rectCoords.yStart = canvasHeight - size - margin;
       break;
     case 2:
-      gMeme.rectCoords.yStart = canvasHeight / 2 - lineSize / 2 - margin / 3;
+      gMeme.rectCoords.yStart = canvasHeight / 2 - size / 2 - margin / 3;
       break;
   }
 
@@ -207,6 +211,7 @@ function getRectCoords() {
 }
 
 function setLineLength(lineLength) {
+  if (gMeme.selectedLineIdx === null) return;
   gMeme.lines[gMeme.selectedLineIdx].lineLength = lineLength;
 }
 
@@ -214,17 +219,12 @@ function getLineLength(idx) {
   return gMeme.lines[idx].lineLength;
 }
 
-// function isLineClicked(pos) {
-//   console.log('pos', pos);
-// }
-
 function getLineCornerCoords(idx) {
   return gMeme.lines[idx].cornerCoord;
 }
 
 function setLineCornerCoords(idx, align, size) {
-  var lineLength = gMeme.lines[idx].lineLength;
-  var heightIdx = gMeme.lines[idx].heightIdx;
+  const { lineLength, heightIdx } = gMeme.lines[idx];
   var borderCoord = {
     xStart: null,
     yStart: null,
