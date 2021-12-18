@@ -7,13 +7,14 @@ function onInitGallery() {
 
 function renderGallery() {
   const images = getImages();
+  console.log('images', images);
 
   strHtml = images
     .map(
-      (img, idx) =>
-        `<div onclick= "onImgSelect(${idx})" class="item item1"><img src="img/${
-          idx + 1
-        }.jpg"></div>\n`
+      (img) =>
+        `<div onclick= "onImgSelect(${
+          img.id
+        })" class="item item1"><img src="img/${img.id + 1}.jpg"></div>\n`
     )
     .join('');
   const elImgGrid = document.querySelector('.grid-container');

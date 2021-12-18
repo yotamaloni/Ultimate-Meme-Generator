@@ -92,9 +92,8 @@ function getImages() {
 function isKeywordIn(img) {
   var sortKey = gSortBy.toLowerCase();
   var isInclude = false;
-  img.keywords.find(function (keyword) {
+  img.keywords.forEach(function (keyword) {
     if (keyword.includes(sortKey)) isInclude = true;
-    return true;
   });
   return isInclude;
 }
