@@ -1,5 +1,4 @@
 'use-strict';
-
 function onInitGallery() {
   renderGallery();
   renderKeywords();
@@ -24,8 +23,9 @@ function renderKeywords() {
   var keywords = getKeywords();
   strHtml = keywords
     .map((keyword) => {
-      keyword = strToFirstUpperCase(keyword);
-      return keyword;
+      keywordToDisplay = strToFirstUpperCase(keyword);
+
+      return `<a class="clean-link"  href=# onclick="onUpdateKeyMap(this.dataset)" data-keyword="${keyword}"> ${keywordToDisplay}</a>`;
     })
     .join(' , ');
   const elImgGrid = document.querySelector('.keywords');
@@ -38,7 +38,7 @@ function onImgSelect(id) {
 }
 
 function onSort(ev) {
-  setSortBy(ev.target.value);
+  setFilterBy(ev.target.value);
   renderGallery();
 }
 
@@ -48,4 +48,31 @@ function moveToSection(classToShow, classToHide) {
   const elSectionToHide = document.querySelector(`.${classToHide}`);
   elSectionToHide.classList.add('hidden');
   if (classToShow === 'meme-editor') onInitMeme();
+}
+
+function onUpdateKeyMap(data) {
+  selectedKeyword = data.keyword;
+
+  setKeywordMap(selectedKeyword);
+  setFilterBy(selectedKeyword);
+  setFontSizeOfKeyword();
+  renderGallery();
+}
+function setFontSizeOfKeyword() {
+  const keywordMap = getKeywordsMap();
+  var sum = 0;
+  for (var key in keywordMap) {
+    sum += keywordMap[key];
+  }
+  const elKeywords = document.querySelectorAll('[data-keyword]');
+  var count = 0;
+  for (var key in keywordMap) {
+    const ratio = keywordMap[key] / sum;
+    var fontSize = ratio * 5;
+    if (fontSize > 2) fontSize = 2;
+    else if (fontSize < 0.75) fontSize = 0.75;
+    elKeyword = elKeywords[count];
+    elKeyword.style.fontSize = fontSize + 'em';
+    count++;
+  }
 }

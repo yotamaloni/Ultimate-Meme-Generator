@@ -67,19 +67,26 @@ button {
 /***********************GALLERY LAYOUT**********************************/
 
 .search-menu {
-  height: 100px;
+  height: 150px;
   margin-top: 100px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding-top: 20px;
-  gap: 10px;
+  margin: 50px 10px 50px 10px;
 }
 
 .keywords,
 .sort-txt {
   font-size: 1.5rem;
+}
+
+.clean-link {
+  text-decoration: none;
+  color: #131212;
+}
+.clean-link:hover {
+  color: #ff7f00;
 }
 
 .rounded-rectangle-gallery {
@@ -117,10 +124,10 @@ button {
   gap: 30px;
   margin: 120px auto;
   flex-direction: column;
-  width: 100%;
   justify-content: center;
   align-items: center;
   height: auto;
+  width: 100%;
 }
 
 .main-editor > * {
@@ -193,7 +200,8 @@ button {
 .configuration img {
   height: 25px;
 }
-.configuration button {
+.configuration button,
+.color-picker {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -203,17 +211,43 @@ button {
   background-color: #fff;
 }
 
-/* 
-.configuration button {
+.check-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.emoji-container button {
+  font-size: 20px;
+  border: none;
+}
+
+.emoji-container {
+  padding: 0 10px;
+  display: none;
+}
+
+#chk:checked + .emoji-container {
+  display: block;
+}
+
+#chk {
+  display: none;
+}
+.get-emoji {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30px;
-  width: 30px;
-} */
+  cursor: pointer;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 5px;
+}
 
 /*MOBILE ONLY*/
-@media (max-width: 850px) {
+@media (max-width: 780px) {
   /* hamburger */
   .main-nav ul {
     position: fixed;
@@ -252,14 +286,30 @@ button {
 }
 
 /*DESKTOP ONLY*/
-@media (min-width: 850px) {
+@media (min-width: 800px) {
   .main-editor {
     flex-direction: row;
-    width: auto;
     justify-content: center;
     align-items: self-start;
     margin-left: 20px;
     margin-right: 20px;
+    width: 50%;
+  }
+
+  .search-menu {
+    height: 150px;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+
+  .main-memes {
+    display: flex;
+    justify-content: center;
   }
 
   .box-3 {
@@ -268,6 +318,9 @@ button {
 
   .main-editor > * {
     flex-basis: 50%;
+  }
+  .canvas-container {
+    text-align: center;
   }
 
   .main-nav ul {

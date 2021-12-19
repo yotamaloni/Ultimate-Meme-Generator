@@ -45,6 +45,7 @@
             </div>
             <div class="keywords">
 
+
             </div>
         </div>
 
@@ -62,91 +63,118 @@
         <header class="meme-editor-header">
 
 
-
-
         </header>
 
+        <div class="main-memes">
+
+            <div class="main-editor">
 
 
-        <div class="main-editor">
 
-
-
-            <div class="canvas-container">
-                <canvas id="my-canvas" width="400" height="400" style="outline:1px solid rgb(78, 22, 180)"></canvas>
-            </div>
-
-            <div class="configuration">
-
-                <!-- LINE1 -->
-                <div class="box-1">
-                    <div class="config txt rounded-rectangle">
-                        <input class="no-border" oninput="onUpdateTxtInstant(event)" type="text" id="text-input"
-                            name="text-input" placeholder="insert your text here...">
-                    </div>
+                <div class="canvas-container">
+                    <canvas id="my-canvas" width="450" height="450" style="outline:1px solid rgb(78, 22, 180)"></canvas>
                 </div>
 
+                <div class="configuration">
 
-
-                <!-- LINE2 -->
-                <div class="box-2">
-
-
-                    <div class="config add-line">
-                        <button onclick="onAddLine()"><img src="img/symbol/add@3x.png"></button>
-                    </div>
-                    <div class="config delete-line">
-                        <button onclick="onDeleteLine()"><img src="img/symbol/trash@3x.png"></button>
-                    </div>
-                </div>
-
-
-                <!-- LINE3 -->
-                <div class="box-3">
-                    <div class="config size">
-                        <button onclick=onUpdateSize(event,this,1)><img
-                                src="img/symbol/increase font - icon@3x.png"></button>
-                        <button onclick=onUpdateSize(event,this,-1)><img
-                                src="img/symbol/decrease font - icon@3x.png"></button>
+                    <!-- LINE1 -->
+                    <div class="box-1">
+                        <div class="config txt rounded-rectangle">
+                            <input class="no-border" oninput="onUpdateTxtInstant(event)" type="text" id="text-input"
+                                name="text-input" placeholder="Double click on line..">
+                        </div>
                     </div>
 
 
-                </div>
 
-                <!-- LINE4 -->
-                <div class="box-4">
-                    <select class="font-input" onchange="onUpdateFontFamily(this.value)" class="font-family">
-                        <option value="impact">Impact</option>
-                        <option value="arial">Arial</option>
-                        <option value="veranda">Verdana</option>
-                        <option value="cursive ">cursive </option>
-                    </select>
-                </div>
+                    <!-- LINE2 -->
+                    <div class="box-2">
 
-                <div class="config color">
 
-                    <input oninput="onUpdateColorInstant(event)" type="color" id="color-picker" name="color-picker"
-                        value="#FF0000">
-                    <label for="color-picker"></label>
-                    <!-- LINE5 -->
+                        <div class="config add-line">
+                            <button onclick="onAddLine()"><img src="img/symbol/add@3x.png"></button>
+                        </div>
+                        <div class="config delete-line">
+                            <button onclick="onDeleteLine()"><img src="img/symbol/trash@3x.png"></button>
+                        </div>
+                    </div>
+
+
+                    <!-- LINE3 -->
+                    <div class="box-3">
+                        <div class="config size">
+                            <button onclick=onUpdateSize(event,this,1)><img
+                                    src="img/symbol/increase font - icon@3x.png"></button>
+                            <button onclick=onUpdateSize(event,this,-1)><img
+                                    src="img/symbol/decrease font - icon@3x.png"></button>
+                        </div>
+
+                        <div class="config align-txt">
+                            <button onclick="onTxtAlign('left')"><img src="img/symbol/align-to-left@3x.png"></button>
+                            <button onclick="onTxtAlign('center')"><img
+                                    src="img/symbol/center-text-alignment@3x.png"></button>
+                            <button onclick="onTxtAlign('right')"><img src="img/symbol/align-to-right@3x.png"></button>
+                        </div>
+
+                    </div>
+
+                    <!-- LINE4 -->
+                    <div class="box-4">
+                        <select class="font-input" onchange="onUpdateFontFamily(this.value)" class="font-family">
+                            <option value="impact">Impact</option>
+                            <option value="arial">Arial</option>
+                            <option value="veranda">Verdana</option>
+                            <option value="cursive ">cursive </option>
+                        </select>
+                    </div>
                     <div class="box-5">
+                        <div class="config color">
+
+                            <input oninput="onUpdateColorInstant(event)" class="color-picker" type="color"
+                                id="color-picker" name="color-picker" value="#FF0000">
+                            <label for="color-picker"></label>
+                        </div>
 
                         <div class="config download">
+                            <table></table>
                             <button><a class="download" onclick="onDownloadImg(this)" download="my-img.jpg"> <img
                                         src="img/symbol/download.png"></a>
                             </button>
                         </div>
                     </div>
+                    <!-- LINE6 -->
+
+                    <div class="box-6">
+                        <div class="check-box">
+                            <label for="chk" class="get-emoji">Add emojis 😀</label>
+                            <input id="chk" type="checkbox" />
+                            <div class="config emoji-container">
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
 
 
                 </div>
 
+    </section>
 
 
-            </div>
+    </div>
+
+
+
+    </div>
 
 
     </section>
+
+    </div>
 
 
     <!-- *************************************************FOOTER******************************************* -->
