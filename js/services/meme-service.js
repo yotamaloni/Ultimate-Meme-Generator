@@ -6,14 +6,20 @@ var gCanvasSize = { width: null, height: null };
 var gKeywords = ['funny', 'sad', 'sport', 'movie', 'politics'];
 var gSortBy = '';
 var gImgs = [];
+var gNextId = 0;
 _createImgs();
 
 var gMeme = {
   selectedImgId: 17,
-  selectedLineIdx: null,
+  selectedLineId: null,
   rectCoords: { xStart: null, yStart: null, xEnd: null, yEnd: null },
   lines: [],
 };
+
+
+function getImgId(){
+  return gMeme.selectedImgId
+}
 
 function setSortBy(sortBy) {
   gSortBy = sortBy;
@@ -43,11 +49,11 @@ function _createImg(id) {
     url: `img/${id + 1}.jpg`,
     keywords: ['sport'],
   };
-  img.keywords = getRandomKeywords();
+  img.keywords = _getRandomKeywords();
   return img;
 }
 
-function getRandomKeywords() {
+function _getRandomKeywords() {
   var keywords = [...gKeywords];
   var NewKeywords = [];
   for (var i = 0; i < 3; i++) {
@@ -59,25 +65,29 @@ function getRandomKeywords() {
   return NewKeywords;
 }
 
-function getNumOfLines() {
+function _getNumOfLines() {
   return gMeme.lines.length;
 }
 
 function setLineColor(color) {
-  gMeme.lines[gMeme.selectedLineIdx].color = color;
+  const line = getLineById(gMeme.selectedLineId);
+  line.color = color;
 }
 
 function setLineTxt(txt) {
   if (!gMeme.lines.length) return;
-  gMeme.lines[gMeme.selectedLineIdx].txt = txt;
+  const line = getLineById(gMeme.selectedLineId);
+  line.txt = txt;
 }
 
 function setLineSize(diff) {
-  gMeme.lines[gMeme.selectedLineIdx].size += diff;
+  const line = getLineById(gMeme.selectedLineId);
+  line.size += diff;
 }
 
-function getLineSize() {
-  return gMeme.lines[gMeme.selectedLineIdx].size;
+function getLineHeight(id) {
+  const line = getLineById(id);
+  return line.size;
 }
 
 function setImgId(id) {
@@ -85,15 +95,16 @@ function setImgId(id) {
 }
 
 function getImages() {
-  const sortedImgs = gImgs.filter((img) => isKeywordIn(img));
+  const sortedImgs = gImgs.filter((img) => _isKeywordIn(img));
   return sortedImgs;
 }
 
-function isKeywordIn(img) {
+function _isKeywordIn(img) {
   var sortKey = gSortBy.toLowerCase();
   var isInclude = false;
-  img.keywords.forEach(function (keyword) {
+  img.keywords.find(function (keyword) {
     if (keyword.includes(sortKey)) isInclude = true;
+    return true;
   });
   return isInclude;
 }
@@ -108,156 +119,119 @@ function setLineIdx() {
   gMeme.selectedLineIdx++;
 }
 
-function setRemoveFocus() {
-  gMeme.selectedLineIdx = null;
-}
-
-function getLineIdx() {
-  return gMeme.selectedLineIdx;
+function getSelectedLineId() {
+  return gMeme.selectedLineId;
 }
 
 function addLine() {
   if (gMeme.lines.length === 3) return;
   gMeme.lines.push(_creatLine());
-  gMeme.selectedLineIdx = gMeme.lines.length - 1;
+  gMeme.selectedLineId = gMeme.lines[gMeme.lines.length - 1].id;
 }
 
 function deleteLine() {
   if (!gMeme.lines.length) return;
-  var selectedIdx = gMeme.selectedLineIdx;
-  gMeme.lines.splice(gMeme.selectedLineIdx, 1);
-  if (!gMeme.lines.length || gMeme.lines.length === 1) {
-    gMeme.selectedLineIdx = 0;
-    return;
-  }
-  selectedIdx = gMeme.lines[0].heightIdx;
-  gMeme.selectedLineIdx = selectedIdx;
+  const idx = gMeme.lines.findIndex((line) => line.id === gMeme.selectedLineId);
+  gMeme.lines.splice(idx, 1);
+  gMeme.selectedLineId = null;
 }
 
 function setFontFamily(fontFamily) {
-  const lineIdx = gMeme.selectedLineIdx;
-  gMeme.lines[lineIdx].font = fontFamily;
-}
-
-function setTxtAlign(align) {
-  const lineIdx = gMeme.selectedLineIdx;
-  gMeme.lines[lineIdx].align = align;
+  const line = getLineById(gMeme.selectedLineId);
+  line.font = fontFamily;
 }
 
 function _creatLine() {
-  const heightIdx = _getHeightIdx();
   const line = {
+    id: gNextId++,
     txt: 'Text..',
     size: 50,
-    align: 'center',
+    align: 'left',
     color: '#FF0000',
     font: 'impact',
     lineLength: 103.369140625,
-    cornerCoord: { xStart: null, yStart: null, xEnd: null, yEnd: null },
-    heightIdx: heightIdx,
+    cornerCoord: { xStart: 0, yStart: 0, xEnd: 103.369140625, yEnd: 50 },
+    isDrag: false,
   };
 
   return line;
 }
 
-function _getHeightIdx() {
-  var heightIdx = 0;
-  if (gMeme.lines.length === 0) return heightIdx;
-  for (var i = 0; i < 3; i++) {
-    heightIdx = i;
-    gMeme.lines.forEach(function (line) {
-      if (i === line.heightIdx) {
-        heightIdx = null;
-      }
-    });
-    if (heightIdx !== null) return heightIdx;
-  }
+function getLineById(id) {
+  const line = gMeme.lines.find((line) => line.id === id);
+  return line;
 }
 
-/******************************************************************************************** */
-
-function getRectCoords() {
-  const idx = gMeme.selectedLineIdx;
-  const { lineLength, heightIdx, align, cornerCoord, size } = gMeme.lines[idx];
-  const canvasWidth = gCanvasSize.width;
-  const canvasHeight = gCanvasSize.height;
-  const margin = 20;
-
-  switch (align) {
-    case 'left':
-      gMeme.rectCoords.xStart = cornerCoord.xStart;
-      break;
-    case 'right':
-      gMeme.rectCoords.xStart = canvasWidth - lineLength - 10;
-      break;
-    case 'center':
-      gMeme.rectCoords.xStart = canvasWidth / 2 - lineLength / 2;
-      break;
-  }
-  switch (heightIdx) {
-    case 0:
-      gMeme.rectCoords.yStart = margin / 2;
-      break;
-    case 1:
-      gMeme.rectCoords.yStart = canvasHeight - size - margin;
-      break;
-    case 2:
-      gMeme.rectCoords.yStart = canvasHeight / 2 - size / 2 - margin / 3;
-      break;
-  }
-
-  return gMeme.rectCoords;
+function setFocus(pos) {
+  const line = getLineClicked(pos);
+  if (!line) selectedId = null;
+  gMeme.selectedLineId = line.id;
 }
 
-function setLineLength(lineLength) {
-  if (gMeme.selectedLineIdx === null) return;
-  gMeme.lines[gMeme.selectedLineIdx].lineLength = lineLength;
+function getLineClicked(pos) {
+  const lines = gMeme.lines;
+  const line = lines.find(function (line) {
+    return _isInLine(line, pos);
+  });
+  if (!line) return false;
+  return line;
 }
 
-function getLineLength(idx) {
-  return gMeme.lines[idx].lineLength;
-}
-
-function getLineCornerCoords(idx) {
-  return gMeme.lines[idx].cornerCoord;
-}
-
-function setLineCornerCoords(idx, align, size) {
-  const { lineLength, heightIdx } = gMeme.lines[idx];
-  var borderCoord = {
-    xStart: null,
-    yStart: null,
-    xEnd: null,
-    yEnd: null,
-  };
-  const margin = 10;
-
-  switch (heightIdx) {
-    case 0:
-      borderCoord.yStart = 0 + margin;
-      break;
-    case 1:
-      borderCoord.yStart = gCanvasSize.height - size - 1.5 * margin;
-      break;
-      '';
-    case 2:
-      borderCoord.yStart = gCanvasSize.height / 2 - size / 2;
-      break;
+function _isInLine(line, pos) {
+  const { xStart, yStart, xEnd, yEnd } = line.cornerCoord;
+  if (pos.x > xStart && pos.x < xEnd && pos.y > yStart && pos.y < yEnd) {
+    return true;
   }
-  borderCoord.yEnd = borderCoord.yStart + size;
+  return false;
+}
 
-  switch (align) {
-    case 'left':
-      borderCoord.xStart = 0 + margin;
-      break;
-    case 'right':
-      borderCoord.xStart = gCanvasSize.width - margin;
-      break;
-    case 'center':
-      borderCoord.xStart = gCanvasSize.width / 2;
-      break;
+function setLineDrag(line) {
+  if (line) {
+    line.isDrag = true;
+    return;
   }
+  const draggedLine = gMeme.lines.find((line) => line.isDrag);
+  if (!draggedLine) return;
+  draggedLine.isDrag = false;
+}
 
-  borderCoord.xEnd = borderCoord.xStart + lineLength;
-  gMeme.lines[idx].cornerCoord = borderCoord;
+function getDragLine() {
+  const line = gMeme.lines.find(function (line) {
+    return line.isDrag;
+  });
+  if (line) return line;
+  return false;
+}
+
+function getLineLength(id) {
+  const line = getLineById(id);
+  return line.lineLength;
+}
+
+function getLineCornerCoords(id) {
+  return gMeme.lines.find((line) => line.id === id).cornerCoord;
+}
+
+function setLineCornerCoords(id, lineLength, size) {
+  const line = gMeme.lines.find((line) => line.id === id);
+  line.cornerCoord.xEnd = line.cornerCoord.xStart + lineLength;
+  line.cornerCoord.yEnd = line.cornerCoord.yStart + size;
+  line.lineLength = lineLength;
+}
+
+function moveLine(line, dx, dy) {
+  if (!_isInCanvas(line, dx, dy)) return;
+  line.cornerCoord.xStart += dx;
+  line.cornerCoord.xEnd += dx;
+  line.cornerCoord.yStart += dy;
+  line.cornerCoord.yEnd += dy;
+}
+
+function _isInCanvas(line, dx, dy) {
+  return (
+    line.cornerCoord.xStart + dx + line.lineLength < gCanvasSize.width ||
+    line.cornerCoord.yStart + dy + line.size < gCanvasSize.height ||
+    line.cornerCoord.xStart + dx + line.lineLength > line.lineLength ||
+    line.cornerCoord.yStart + dy + line.size > line.size
+  );
 }

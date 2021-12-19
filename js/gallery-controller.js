@@ -7,11 +7,10 @@ function onInitGallery() {
 
 function renderGallery() {
   const images = getImages();
-  console.log('images', images);
 
   strHtml = images
     .map(
-      (img) =>
+      (img, idx) =>
         `<div onclick= "onImgSelect(${
           img.id
         })" class="item item1"><img src="img/${img.id + 1}.jpg"></div>\n`
