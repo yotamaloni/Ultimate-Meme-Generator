@@ -44,7 +44,7 @@ function drawOnCanvas(meme) {
   const imgId = meme.selectedImgId;
   var img = new Image();
   img.src = `img/${imgId + 1}.jpg`;
-  img.onload = () => {
+  // img.onload = () => {
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
     if (!meme.lines.length) return;
     meme.lines.forEach(function (line, idx) {
@@ -52,7 +52,7 @@ function drawOnCanvas(meme) {
       const { txt, size, color, font, id } = lines[idx];
       drawText(txt, size, color, font, id);
     });
-  };
+  // };
 }
 
 function drawText(txt, size, color, font, id) {
