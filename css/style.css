@@ -5,13 +5,12 @@
 
 * {
   box-sizing: border-box;
-  font-family: Montserrat-Regular;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 html {
   color: #131212;
   line-height: 1.714;
+  font-family: Montserrat-Regular;
 }
 
 body {
