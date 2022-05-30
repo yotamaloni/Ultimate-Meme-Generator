@@ -2,11 +2,15 @@
 
 ## Author: Yotam Aloni
 
-Technologies used
+### Technologies used
 
 Canvas
 
+Html5
+
 Vanilla
+
+CSS
 
 
 ## What i tried to do
