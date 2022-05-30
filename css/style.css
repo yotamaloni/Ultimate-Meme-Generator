@@ -118,6 +118,10 @@ button {
   justify-content: center;
 }
 
+input.no-border{
+  outline: none;
+}
+
 /***********************MEMES LAYOUT**********************************/
 
 .main-editor {
