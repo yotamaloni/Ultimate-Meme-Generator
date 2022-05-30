@@ -5,12 +5,13 @@
 
 * {
   box-sizing: border-box;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
 html {
   color: #131212;
   line-height: 1.714;
-  font-family: Montserrat-Regular;
+  /* font-family: Montserrat-Regular; */
 }
 
 body {
