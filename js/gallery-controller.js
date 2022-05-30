@@ -1,4 +1,4 @@
-'use-strict';
+"use-strict";
 function onInitGallery() {
   renderGallery();
   renderKeywords();
@@ -14,8 +14,8 @@ function renderGallery() {
           img.id
         })" class="item item1"><img src="img/${img.id + 1}.jpg"></div>\n`
     )
-    .join('');
-  const elImgGrid = document.querySelector('.grid-container');
+    .join("");
+  const elImgGrid = document.querySelector(".grid-container");
   elImgGrid.innerHTML = strHtml;
 }
 
@@ -27,14 +27,14 @@ function renderKeywords() {
 
       return `<a class="clean-link"  href=# onclick="onUpdateKeyMap(this.dataset)" data-keyword="${keyword}"> ${keywordToDisplay}</a>`;
     })
-    .join(' , ');
-  const elImgGrid = document.querySelector('.keywords');
+    .join(" , ");
+  const elImgGrid = document.querySelector(".keywords");
   elImgGrid.innerHTML = strHtml;
 }
 
 function onImgSelect(id) {
   setImgId(id);
-  moveToSection('meme-editor', 'gallery');
+  moveToSection("meme-editor", "gallery");
 }
 
 function onSort(ev) {
@@ -44,10 +44,10 @@ function onSort(ev) {
 
 function moveToSection(classToShow, classToHide) {
   const elSectionToShow = document.querySelector(`.${classToShow}`);
-  elSectionToShow.classList.remove('hidden');
+  elSectionToShow.classList.remove("hidden");
   const elSectionToHide = document.querySelector(`.${classToHide}`);
-  elSectionToHide.classList.add('hidden');
-  if (classToShow === 'meme-editor') onInitMeme();
+  elSectionToHide.classList.add("hidden");
+  if (classToShow === "meme-editor") onInitMeme();
 }
 
 function onUpdateKeyMap(data) {
@@ -64,7 +64,7 @@ function setFontSizeOfKeyword() {
   for (var key in keywordMap) {
     sum += keywordMap[key];
   }
-  const elKeywords = document.querySelectorAll('[data-keyword]');
+  const elKeywords = document.querySelectorAll("[data-keyword]");
   var count = 0;
   for (var key in keywordMap) {
     const ratio = keywordMap[key] / sum;
@@ -72,7 +72,7 @@ function setFontSizeOfKeyword() {
     if (fontSize > 2) fontSize = 2;
     else if (fontSize < 0.75) fontSize = 0.75;
     elKeyword = elKeywords[count];
-    elKeyword.style.fontSize = fontSize + 'em';
+    elKeyword.style.fontSize = fontSize + "em";
     count++;
   }
 }

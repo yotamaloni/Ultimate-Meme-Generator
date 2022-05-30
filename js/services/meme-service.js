@@ -1,18 +1,26 @@
-'use-strict';
+"use-strict";
 const NUM_OF_IMG = 18;
 var gCurrImgId;
 var gCurrImgId = getRandomIntInclusive(0, 17);
 var gCanvasSize = { width: null, height: null };
-var gKeywords = ['all', 'funny', 'sad', 'sport', 'movie', 'politics'];
-const EMOJIS = [
-  ['😀', '😁', '🤩', '💥'],
-  ['🌈', '🧑', '👿', '🤣'],
-  ['🖖', '👀', '👨‍❤️‍💋‍👨', '👽'],
-  ['🐣', '🍄', '🌍', '😰'],
+var gKeywords = [
+  "all",
+  "funny",
+  "sport",
+  "movie",
+  "politics",
+  "animal",
+  "baby",
 ];
-var gKeywordMap = {};
+const EMOJIS = [
+  ["😀", "😁", "🤩", "💥"],
+  ["🌈", "🧑", "👿", "🤣"],
+  ["🖖", "👀", "👨‍❤️‍💋‍👨", "👽"],
+  ["🐣", "🍄", "🌍", "😰"],
+];
 
-var gFilterBy = '';
+var gKeywordMap = {};
+var gFilterBy = "";
 var gImgs = [];
 var gNextId = 0;
 _createImgs();
@@ -45,10 +53,10 @@ function getImgId() {
 }
 
 function setFilterBy(filterBy) {
-  if (filterBy === 'all') filterBy = '';
+  if (filterBy === "all") filterBy = "";
   gFilterBy = filterBy;
 }
-
+``;
 function getKeywords() {
   return gKeywords;
 }
@@ -65,6 +73,24 @@ function _createImgs() {
   for (let i = 0; i < NUM_OF_IMG; i++) {
     gImgs.push(_createImg(i));
   }
+  gImgs[0].keywords = ["funny", "politics"];
+  gImgs[1].keywords = ["animal"];
+  gImgs[2].keywords = ["baby", "animal"];
+  gImgs[3].keywords = ["animal", "funny"];
+  gImgs[4].keywords = ["baby"];
+  gImgs[5].keywords = ["movie"];
+  gImgs[6].keywords = ["funny", "baby"];
+  gImgs[7].keywords = ["funny", "movie"];
+  gImgs[8].keywords = ["funny", "baby"];
+  gImgs[9].keywords = ["politics", "funny"];
+  gImgs[10].keywords = ["sport", "funny"];
+  gImgs[11].keywords = ["movie"];
+  gImgs[12].keywords = ["movie"];
+  gImgs[13].keywords = ["movie"];
+  gImgs[14].keywords = ["movie", "funny"];
+  gImgs[15].keywords = ["movie", "funny"];
+  gImgs[16].keywords = ["politics"];
+  gImgs[17].keywords = ["movie"];
 }
 
 function setLineCoordByAlign(align) {
@@ -72,13 +98,13 @@ function setLineCoordByAlign(align) {
   const lineLength = line.lineLength;
   const coord = line.cornerCoord;
   switch (align) {
-    case 'left':
+    case "left":
       coord.xStart = 0;
       break;
-    case 'center':
+    case "center":
       coord.xStart = gCanvasSize.width / 2 - lineLength / 2;
       break;
-    case 'right':
+    case "right":
       coord.xStart = gCanvasSize.width - lineLength;
       break;
   }
@@ -87,11 +113,11 @@ function setLineCoordByAlign(align) {
 function _creatLine() {
   const line = {
     id: gNextId++,
-    txt: 'Text..',
+    txt: "Text..",
     size: 50,
-    align: 'left',
-    color: '#FF0000',
-    font: 'impact',
+    align: "left",
+    color: "#FF0000",
+    font: "impact",
     lineLength: 103.369140625,
     cornerCoord: { xStart: 0, yStart: 0, xEnd: 103.369140625, yEnd: 50 },
     isDrag: false,
@@ -104,22 +130,9 @@ function _createImg(id) {
   const img = {
     id,
     url: `img/${id + 1}.jpg`,
-    keywords: ['sport'],
+    keywords: [],
   };
-  img.keywords = _getRandomKeywords();
   return img;
-}
-
-function _getRandomKeywords() {
-  var keywords = [...gKeywords];
-  var NewKeywords = [];
-  for (var i = 0; i < 3; i++) {
-    var radomInt = getRandomIntInclusive(0, keywords.length - 1);
-    var keyword = keywords[radomInt];
-    NewKeywords.push(keyword);
-    keywords.splice(radomInt, 1);
-  }
-  return NewKeywords;
 }
 
 function _getNumOfLines() {
@@ -152,18 +165,13 @@ function setImgId(id) {
 }
 
 function getImages() {
-  const sortedImgs = gImgs.filter((img) => _isKeywordIn(img));
-  return sortedImgs;
-}
-
-function _isKeywordIn(img) {
-  var filterKey = gFilterBy.toLowerCase();
-  var isInclude = false;
-  img.keywords.find(function (keyword) {
-    if (keyword.includes(filterKey)) isInclude = true;
-    return true;
+  if (!gFilterBy) return gImgs;
+  const sortedImgs = gImgs.filter((img) => {
+    return img.keywords.find((keyword) => {
+      return keyword.includes(gFilterBy.toLowerCase());
+    });
   });
-  return isInclude;
+  return sortedImgs;
 }
 
 function setLineIdx() {

@@ -1,6 +1,6 @@
 @font-face {
   font-family: Montserrat-Regular;
-  src: url(font/Montserrat/Montserrat-Regular.ttf);
+  src: url(/font/Montserrat/Montserrat-Regular.ttf);
 }
 
 * {
@@ -85,6 +85,7 @@ button {
   text-decoration: none;
   color: #131212;
 }
+
 .clean-link:hover {
   color: #ff7f00;
 }
@@ -130,7 +131,7 @@ button {
   width: 100%;
 }
 
-.main-editor > * {
+.main-editor>* {
   flex-basis: 50%;
 }
 
@@ -158,7 +159,7 @@ button {
   width: auto;
 }
 
-.configuration > *,
+.configuration>*,
 .size,
 .align-txt {
   display: flex;
@@ -170,7 +171,7 @@ button {
   justify-content: center;
 }
 
-.box-3 > * {
+.box-3>* {
   flex-basis: 50%;
 }
 
@@ -200,6 +201,7 @@ button {
 .configuration img {
   height: 25px;
 }
+
 .configuration button,
 .color-picker {
   display: flex;
@@ -228,13 +230,14 @@ button {
   display: none;
 }
 
-#chk:checked + .emoji-container {
+#chk:checked+.emoji-container {
   display: block;
 }
 
 #chk {
   display: none;
 }
+
 .get-emoji {
   display: flex;
   justify-content: center;
@@ -248,6 +251,7 @@ button {
 
 /*MOBILE ONLY*/
 @media (max-width: 780px) {
+
   /* hamburger */
   .main-nav ul {
     position: fixed;
@@ -316,9 +320,10 @@ button {
     flex-wrap: nowrap;
   }
 
-  .main-editor > * {
+  .main-editor>* {
     flex-basis: 50%;
   }
+
   .canvas-container {
     text-align: center;
   }
@@ -338,14 +343,16 @@ button {
   .main-nav ul a:hover {
     color: rgb(71, 68, 68);
   }
+
   .main-nav ul a::after {
     color: white;
     content: ' |';
   }
 
-  .main-header > * {
+  .main-header>* {
     padding: 0 20px;
   }
+
   .btn-menu {
     display: none;
   }
